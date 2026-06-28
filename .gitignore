@@ -1,0 +1,17 @@
+/_build/
+/deps/
+/doc/
+/.nerves/
+erl_crash.dump
+*.ez
+*.fw
+*.log
+*.jpg
+bootpart.vfat
+wiiu-sd.img
+
+# Aroma cold-boot overlay: large and console-specific (contains per-console
+# data). Supply it yourself under board/wiiu/sdcard/wiiu/ — it is not committed.
+/board/wiiu/sdcard/
+
+.elixir_ls/

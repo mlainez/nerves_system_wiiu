@@ -1,0 +1,7 @@
+#
+# Custom Buildroot packages for nerves_system_wiiu.
+#
+# Add `source "$NERVES_DEFCONFIG_DIR/packages/<pkg>/Config.in"` lines here as
+# you add board-specific packages. Kept present so BR2_EXTERNAL machinery has
+# something to source.
+#

@@ -1,0 +1,80 @@
+# Merged on top of the in-tree arch/powerpc/configs/wiiu_defconfig
+# (linux-wiiu rewrite-6.6-smp). Adds what a Nerves system needs.
+
+# HDMI console + USB keyboard
+CONFIG_VT=y
+CONFIG_VT_CONSOLE=y
+CONFIG_VT_HW_CONSOLE_BINDING=y
+CONFIG_UNIX98_PTYS=y
+CONFIG_FRAMEBUFFER_CONSOLE=y
+CONFIG_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY=y
+CONFIG_LOGO=y
+CONFIG_INPUT=y
+CONFIG_INPUT_KEYBOARD=y
+CONFIG_HID=y
+CONFIG_USB_HID=y
+CONFIG_HID_GENERIC=y
+
+# Read-only squashfs root (A/B)
+CONFIG_SQUASHFS=y
+CONFIG_SQUASHFS_LZ4=y
+CONFIG_SQUASHFS_XATTR=y
+
+# /data application partition (F2FS)
+CONFIG_F2FS_FS=y
+
+# tmpfs + devtmpfs
+CONFIG_TMPFS=y
+CONFIG_TMPFS_POSIX_ACL=y
+CONFIG_DEVTMPFS=y
+CONFIG_DEVTMPFS_MOUNT=y
+
+# FAT boot partition access
+CONFIG_FAT_FS=y
+CONFIG_VFAT_FS=y
+CONFIG_MSDOS_FS=y
+CONFIG_NLS_CODEPAGE_437=y
+CONFIG_NLS_ISO8859_1=y
+CONFIG_NLS_UTF8=y
+
+# USB ethernet adapters
+CONFIG_USB=y
+CONFIG_NET=y
+CONFIG_INET=y
+CONFIG_USB_NET_DRIVERS=y
+CONFIG_USB_USBNET=y
+CONFIG_USB_NET_AX8817X=y
+CONFIG_USB_NET_AX88179_178A=y
+CONFIG_USB_NET_CDCETHER=y
+CONFIG_USB_NET_CDC_NCM=y
+CONFIG_USB_NET_RNDIS_HOST=y
+CONFIG_USB_NET_SMSC95XX=y
+
+CONFIG_PROC_FS=y
+CONFIG_SYSFS=y
+CONFIG_CGROUPS=y
+
+# VintageNet uses policy routing; without these `ip rule` fails and
+# VintageNet.RouteManager crashes.
+CONFIG_IP_ADVANCED_ROUTER=y
+CONFIG_IP_MULTIPLE_TABLES=y
+
+# Software watchdog (the Latte has no hardware watchdog) for nerves_heart.
+CONFIG_WATCHDOG=y
+CONFIG_WATCHDOG_CORE=y
+CONFIG_SOFT_WATCHDOG=y
+
+# WiFi (Broadcom BCM43362, SDIO). Kept as modules: building it in bloats the
+# image enough to break the early PPC hash-table allocation. Autoloaded by
+# nerves_uevent once the SDIO chip enumerates; firmware/nvram ship in the
+# rootfs overlay; the SDHCI PIO patch (linux-patches/0001) makes it work.
+CONFIG_CFG80211=m
+CONFIG_MAC80211=m
+CONFIG_BRCMUTIL=m
+CONFIG_BRCMFMAC=m
+CONFIG_BRCMFMAC_SDIO=y
+
+# Ship modules uncompressed: depmod can't index XZ-compressed modules without
+# XZ support in the toolchain's kmod, leaving modules.alias empty (no autoload).
+CONFIG_MODULE_COMPRESS_NONE=y
+# CONFIG_MODULE_COMPRESS_XZ is not set
