@@ -1,0 +1,18 @@
+#!/bin/sh
+# Print the Wii U console serial number (e.g. "FEM123456789").
+#
+# It lives in the Latte SEEPROM (at93c66, exposed as nvmem "spi0.00"):
+#   sysprod_code   @ 0x158 (block 43, bs=8),  8 bytes  -> "FEM"
+#   sysprod_serial @ 0x160 (block 22, bs=16), 16 bytes -> "108489769"
+# Both are NUL-padded ASCII; the shell drops the NULs from command
+# substitution. Reads MUST be a single block-sized dd: the SEEPROM nvmem
+# returns a short read for `bs=1`, which truncates the value to one byte.
+# Used by boardid (see /etc/boardid.config).
+NV=/sys/bus/nvmem/devices/spi0.00/nvmem
+if [ ! -r "$NV" ]; then
+    echo "unknown"
+    exit 0
+fi
+code=$(dd if="$NV" bs=8 skip=43 count=1 2>/dev/null)
+serial=$(dd if="$NV" bs=16 skip=22 count=1 2>/dev/null)
+printf '%s%s\n' "$code" "$serial"
