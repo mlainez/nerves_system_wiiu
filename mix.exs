@@ -87,7 +87,7 @@ defmodule NervesSystemWiiu.MixProject do
   defp package_files do
     [
       "rootfs_overlay",
-      "board",
+      "board/wiiu/fw.img",
       "scripts",
       "fwup_include",
       "fwup-ops.conf",
