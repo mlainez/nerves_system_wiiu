@@ -1,5 +1,10 @@
 # Merged on top of the in-tree arch/powerpc/configs/wiiu_defconfig
-# (linux-wiiu rewrite-6.6-smp). Adds what a Nerves system needs.
+# (linux-wiiu rewrite-6.6). Adds what a Nerves system needs.
+
+# SMP — all 3 Espresso cores. Support + the Espresso atomic erratum come from
+# linux-patches/ (cherry-picked from rewrite-6.6-smp).
+CONFIG_SMP=y
+CONFIG_NR_CPUS=3
 
 # HDMI console + USB keyboard
 CONFIG_VT=y
@@ -67,7 +72,7 @@ CONFIG_SOFT_WATCHDOG=y
 # WiFi (Broadcom BCM43362, SDIO). Kept as modules: building it in bloats the
 # image enough to break the early PPC hash-table allocation. Autoloaded by
 # nerves_uevent once the SDIO chip enumerates; firmware/nvram ship in the
-# rootfs overlay; the SDHCI PIO patch (linux-patches/0001) makes it work.
+# rootfs overlay. The SDHCI DMA fix is in the rewrite-6.6 base (DT "no-dma").
 CONFIG_CFG80211=m
 CONFIG_MAC80211=m
 CONFIG_BRCMUTIL=m

@@ -97,8 +97,9 @@ SMP atomic-errata workarounds. It is downloaded automatically at build time.
 
 ## Linux kernel configuration
 
-The kernel starts from the in-tree `wiiu` defconfig plus `linux-6.6.fragment`
-(SquashFS/F2FS, HDMI console, USB-ethernet, WiFi modules). `linux-patches/`
-holds one out-of-tree patch that forces the WiFi SDHCI controller to PIO — its
-SDMA engine corrupts bulk SDIO transfers, which otherwise blocks the BCM43362
-firmware download.
+The kernel is pinned to the linux-wiiu `rewrite-6.6` tip (Linux 6.6.106), which
+already carries the WiFi SDHCI fix (device-tree `no-dma`). It starts from the
+in-tree `wiiu` defconfig plus `linux-6.6.fragment` (SquashFS/F2FS, HDMI console,
+USB-ethernet, WiFi modules, SMP). `linux-patches/` holds two patches
+cherry-picked from `rewrite-6.6-smp` that enable SMP across all three Espresso
+cores (the SMP support and the Espresso atomic erratum).

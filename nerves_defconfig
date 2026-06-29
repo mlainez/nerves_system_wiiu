@@ -24,7 +24,10 @@ BR2_BACKUP_SITE="http://dl.nerves-project.org"
 BR2_LINUX_KERNEL=y
 BR2_LINUX_KERNEL_CUSTOM_GIT=y
 BR2_LINUX_KERNEL_CUSTOM_REPO_URL="https://gitlab.com/linux-wiiu/linux-wiiu.git"
-BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION="rewrite-6.6-smp"
+# Pinned to the rewrite-6.6 tip (Linux 6.6.106). It carries the WiFi fix,
+# GameCube audio and r600fb display work; SMP is added on top via linux-patches/.
+# The upstream rewrite-6.6-smp branch trails rewrite-6.6 by ~26 LTS releases.
+BR2_LINUX_KERNEL_CUSTOM_REPO_VERSION="b84eb2dde8e2387d0e7adc145a171948fc390c97"
 BR2_LINUX_KERNEL_USE_DEFCONFIG=y
 BR2_LINUX_KERNEL_DEFCONFIG="wiiu"
 BR2_LINUX_KERNEL_CONFIG_FRAGMENT_FILES="${NERVES_DEFCONFIG_DIR}/linux-6.6.fragment"
@@ -32,7 +35,7 @@ BR2_LINUX_KERNEL_IMAGE_TARGET_CUSTOM=y
 BR2_LINUX_KERNEL_IMAGE_TARGET_NAME="dtbImage.wiiu"
 BR2_LINUX_KERNEL_IMAGE_NAME="dtbImage.wiiu"
 BR2_LINUX_KERNEL_NEEDS_HOST_OPENSSL=y
-# linux-patches/0001: force the wifi SDHCI controller to PIO (its SDMA is broken).
+# linux-patches/: SMP (all 3 Espresso cores) cherry-picked onto rewrite-6.6.
 BR2_LINUX_KERNEL_PATCH="${NERVES_DEFCONFIG_DIR}/linux-patches"
 
 # Nerves rootfs skeleton / init / device management
