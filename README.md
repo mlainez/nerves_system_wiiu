@@ -91,7 +91,7 @@ Additional key/value pairs can be provisioned by setting
 
 The Espresso CPU isn't covered by an upstream Nerves toolchain, so this system
 depends on
-[`nerves_toolchain_wiiu_ppc`](https://github.com/Spin42/nerves_toolchain_wiiu_ppc)
+[`nerves_toolchain_wiiu_ppc`](https://github.com/mlainez/nerves_toolchain_wiiu_ppc)
 — a prebuilt `powerpc-nerves-linux-gnu` GCC/glibc toolchain with the Espresso
 SMP atomic-errata workarounds. It is downloaded automatically at build time.
 
