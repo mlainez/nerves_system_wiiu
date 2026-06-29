@@ -57,7 +57,7 @@ defmodule NervesSystemWiiu.MixProject do
     [
       {:nerves, "~> 1.11", runtime: false},
       {:nerves_system_br, "~> 1.33", runtime: false},
-      {:nerves_toolchain_wiiu_ppc, "~> 13.2.0", runtime: false},
+      {:nerves_toolchain_wiiu_ppc, github: "mlainez/nerves_toolchain_wiiu_ppc", tag: "v13.2.0", runtime: false},
       {:nerves_system_linter, "~> 0.4", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.22", only: :docs, runtime: false}
     ]
