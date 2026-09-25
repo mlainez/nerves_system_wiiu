@@ -14,4 +14,9 @@ wiiu-sd.img
 # data). Supply it yourself under board/wiiu/sdcard/wiiu/ — it is not committed.
 /board/wiiu/sdcard/
 
+# Starbuck/ARM loader: signed/encrypted with Nintendo key material, ours to
+# use but not to redistribute. Supply your own at board/wiiu/fw.img (or set
+# WIIU_FW_IMG) — it is not committed.
+/board/wiiu/fw.img
+
 .elixir_ls/

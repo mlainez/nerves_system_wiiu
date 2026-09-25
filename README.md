@@ -37,12 +37,12 @@ The Wii U reaches Linux through Aroma CFW, which launches the `fw.img` loader
 (`linux-loader`) that boots the kernel from the SD card's FAT boot partition.
 
 1. Burn firmware to an SD card with `mix firmware.burn` (or `fwup`).
-2. The boot partition must also contain a working Aroma environment. Those files
-   are large and console-specific, so they are not shipped here — populate
-   `board/wiiu/sdcard/wiiu/` from a known-good Aroma SD card before building (or
-   point `WIIU_SDCARD_OVERLAY` at one). A prebuilt common-key `fw.img` is
-   included; replace `board/wiiu/fw.img` (or set `WIIU_FW_IMG`) for a
-   per-console loader.
+2. The boot partition must also contain a working Aroma environment and a
+   `fw.img` loader. Neither is shipped here — they are large, console/key
+   specific, and not ours to redistribute:
+   - Populate `board/wiiu/sdcard/wiiu/` from a known-good Aroma SD card before
+     building (or point `WIIU_SDCARD_OVERLAY` at one).
+   - Drop your own `fw.img` at `board/wiiu/fw.img` (or set `WIIU_FW_IMG`).
 3. Insert the card and launch via Aroma's CFW booter. Hold **B** on the GamePad
    during boot to reach the Petitboot menu.
 
